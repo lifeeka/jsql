@@ -1,0 +1,23 @@
+{
+  "name": "lifeeka/jsql",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "beta",
+  "require": {
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0",
+    "vlucas/phpdotenv": "^2.4"
+
+  },
+  "autoload": {
+    "psr-4": {
+      "lifeeka\\jsql\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\jsql\\": "tests"
+    }
+  }
+}
