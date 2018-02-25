@@ -2,14 +2,9 @@
 
 namespace lifeeka\jsql\Extractor;
 
-
 /**
- * Class MysqlExtractor
+ * Class MysqlExtractor.
  */
 class MysqlExtractor
 {
-
-
-
-
 }
