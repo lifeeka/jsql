@@ -11,8 +11,8 @@ class ClientTest extends TestCase
     {
         $config['host'] = '127.0.0.1';
         $config['db'] = 'test';
-        $config['username'] = 'root';
-        $config['password'] = 'secret';
+        $config['username'] = 'test';
+        $config['password'] = 'test';
 
         $this->Client = new Client($config);
 
