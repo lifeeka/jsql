@@ -5,7 +5,7 @@ env:
   - DB=mysql
 before_script:
     - composer install
-    - mysql -e "CREATE USER test WITH PASSWORD 'test';"
+    - mysql -e 'CREATE USER test WITH PASSWORD "test";'
     - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
 addons:
   mariadb: '10.2'
