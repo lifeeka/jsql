@@ -9,13 +9,11 @@ class ClientTest extends TestCase
 
     public function setUp()
     {
-        $env = new Dotenv\Dotenv('./');
-        $env->load();
 
-        $config['host'] = getenv('DB_HOST');
-        $config['db'] = getenv('DB_DATABASE');
-        $config['username'] = getenv('DB_USERNAME');
-        $config['password'] = getenv('DB_PASSWORD');
+        $config['host'] = '127.0.0.1';
+        $config['db'] = 'test';
+        $config['username'] = 'root';
+        $config['password'] = 'secret';
 
         $this->Client = new Client($config);
 
