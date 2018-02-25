@@ -37,12 +37,12 @@ class JsonExtractor
 
         foreach ($data as $key => $value) {
             if (is_array($value) && is_object($value[0])) {
-                $sql_tables .= $this->getTables($prefix . $key, $this->getHighestColumnArray($value));
-                $sql_tables .= $this->toMysqlTables($this->getHighestColumnArray($value), $prefix . $key . '_');
+                $sql_tables .= $this->getTables($prefix.$key, $this->getHighestColumnArray($value));
+                $sql_tables .= $this->toMysqlTables($this->getHighestColumnArray($value), $prefix.$key.'_');
             } elseif (is_array($value)) {
-                $sql_tables .= $this->getTables($prefix . $key, $value);
+                $sql_tables .= $this->getTables($prefix.$key, $value);
             } elseif (is_object($value)) {
-                $sql_tables .= $this->getTables($prefix . $key, $value);
+                $sql_tables .= $this->getTables($prefix.$key, $value);
             }
         }
 
