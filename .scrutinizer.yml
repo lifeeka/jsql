@@ -1,0 +1,7 @@
+build:
+    # Run after dependencies
+    project_setup:
+        before:
+            - mysql -u root -e 'CREATE DATABASE test;'
+            - mysql -u root -e "CREATE USER 'test'@'localhost' IDENTIFIED BY 'test';"
+            - mysql -u root -e "GRANT ALL ON test.* TO 'test'@'localhost';"
