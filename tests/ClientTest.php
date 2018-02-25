@@ -9,7 +9,6 @@ class ClientTest extends TestCase
 
     public function setUp()
     {
-
         $config['host'] = '127.0.0.1';
         $config['db'] = 'test';
         $config['username'] = 'root';
