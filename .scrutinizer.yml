@@ -1,3 +1,14 @@
+filter:
+    excluded_paths:
+          - tests/*
+
+checks:
+    php: true
+coding_style:
+    php:
+        indentation:
+            general:
+                size: 1
 build:
     # Run after dependencies
     project_setup:
