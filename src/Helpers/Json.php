@@ -3,20 +3,19 @@
 namespace lifeeka\jsql\Helpers;
 
 /**
- * Class MysqlExtractor
+ * Class MysqlExtractor.
  */
 class Json
 {
-
-    var $json_text;
-    var $json_array;
-
+    public $json_text;
+    public $json_array;
 
     /**
      * Json constructor.
-     * @param String $json
+     *
+     * @param string $json
      */
-    function __construct(String $json)
+    public function __construct(String $json)
     {
         $this->json_text = $json;
     }
@@ -24,7 +23,7 @@ class Json
     /**
      * @return mixed
      */
-    function toArray()
+    public function toArray()
     {
         return json_decode($this->json_text, true);
     }
@@ -32,10 +31,8 @@ class Json
     /**
      * @return mixed
      */
-    function toObject()
+    public function toObject()
     {
         return json_decode($this->json_text);
     }
-
-
 }

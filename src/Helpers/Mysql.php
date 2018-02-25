@@ -2,22 +2,20 @@
 
 namespace lifeeka\jsql\Helpers;
 
-
 /**
- * Class Mysql
- * @package lifeeka\jsql\Helpers
+ * Class Mysql.
  */
 class Mysql
 {
-    var $mysql_text;
-    var $mysql_array;
-
+    public $mysql_text;
+    public $mysql_array;
 
     /**
      * Json constructor.
-     * @param String $mysql
+     *
+     * @param string $mysql
      */
-    function __construct(String $mysql)
+    public function __construct(String $mysql)
     {
         $this->mysql_text = $mysql;
     }
@@ -25,7 +23,8 @@ class Mysql
     /**
      * @return mixed
      */
-    function toArray(){
+    public function toArray()
+    {
         return json_decode($this->mysql_array);
     }
 }
