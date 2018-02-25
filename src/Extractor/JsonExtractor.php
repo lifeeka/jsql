@@ -69,7 +69,6 @@ class JsonExtractor
         }
 
         foreach ($column as $count => $column_item) {
-
             switch ($column_item['type']) {
                 case 'integer':
                     $column_sql .= "`{$column_item['name']}` int(20)";
