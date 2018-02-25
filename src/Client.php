@@ -68,8 +68,6 @@ class Client
             return $this->db_connection->query($this->sql);
         } catch (\Exception $e) {
             $this->error = $e->getMessage();
-            print_r($this->error);
-
             return false;
         }
     }
