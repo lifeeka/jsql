@@ -10,6 +10,10 @@ use lifeeka\jsql\Helpers\Json;
 class JsonExtractor
 {
     public $json;
+
+    private $table = [];
+    private $data = [];
+
     public $need_id = true;
     public $snake_case_column = true;
     public $snake_case_table = true;
@@ -25,6 +29,22 @@ class JsonExtractor
         $this->json = $json;
     }
 
+    /**
+     * @return array
+     */
+    public function getTablesArray()
+    {
+        return $this->table;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDataArray()
+    {
+        return $this->data;
+    }
+
 
     /**
      * @param bool $data
@@ -33,8 +53,6 @@ class JsonExtractor
      */
     public function toMysqlTables($data = false, $prefix = '')
     {
-        $sql_tables = '';
-
         if (!$data) {//if this is not a recursive
             $data = $this->json->toObject();
         }
@@ -44,81 +62,57 @@ class JsonExtractor
             $table_name = is_numeric($key) ? $this->main_table_name : $key;
 
             if (is_array($value) && is_object($value[0])) {//check whether it's a array and it's firs element is a object
-                $sql_tables .= $this->getTable($prefix . $table_name, $value);//get table sql
-                $sql_tables .= $this->toMysqlTables($this->getHighestColumnArray($value), $prefix . $table_name . '_');//get it inside tables
-            } elseif (is_array($value)) {//if it's a array and  firs element is not a object
-                $sql_tables .= $this->getTable($prefix . $table_name, $value);
-            } elseif (is_object($value)) {//if it's a object and  firs element is not a object
-                $sql_tables .= $this->getTable($prefix . $table_name, $value);
+
+                $table_data = $this->getTable($prefix . $table_name, $value);//get table sql
+                $this->table[$table_data['tables']['name']] = $table_data['tables']['column'];
+                $this->data[$table_data['data']['table']] = $table_data['data']['data'];
+
+                $this->toMysqlTables($this->getHighestColumnArray($value), $prefix . $table_name . '_');//get it inside tables
+
+            } elseif (is_array($value) || is_object($value)) {//if it's a array and  firs element is not a object
+
+                $table_data = $this->getTable($prefix . $table_name, $value);
+                $this->table[$table_data['tables']['name']] = $table_data['tables']['column'];
+                $this->data[$table_data['data']['table']] = $table_data['data']['data'];
             }
         }
 
-        return $sql_tables;
     }
+
 
     /**
      * @param $table
      * @param $data
-     *
-     * @return string
+     * @return array
      */
     public function getTable($table, $data)
     {
-        $sql = '';
-        $column_sql = '';
-
         $column = $this->getColumn($this->getHighestColumnArray($data));
-
-        if ($this->need_id && array_search('id', array_column($column, 'name'))) {
-            $column_sql .= '`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,';
-            $column_sql .= 'PRIMARY KEY (`id`)';
-            $column_sql .= $column ? ',' : '';
-        }
-
-        foreach ($column as $count => $column_item) {
-
-            if ($this->snake_case_column)
-                $column_item['name'] = $this->snakeCase($column_item['name']);
-
-            switch ($column_item['type']) {
-
-                case 'string':
-                    $column_sql .= "`{$column_item['name']}` TEXT COLLATE 'utf8_unicode_ci'";
-                    break;
-                case 'integer':
-                    $column_sql .= "`{$column_item['name']}` int(20)";
-                    break;
-                case 'boolean':
-                    $column_sql .= "`{$column_item['name']}` INT(1) COLLATE 'utf8_unicode_ci'";
-                    break;
-                case 'double':
-                    $column_sql .= "`{$column_item['name']}` float(50) COLLATE 'utf8_unicode_ci'";
-                    break;
-                default :
-                    print_r($column_item);
-            }
-
-
-            if ((count($column) - $count) > 1) {//check whether this is not the last one
-                $column_sql .= ',';
-            }
-        }
 
         if ($this->snake_case_table)
             $table = $this->snakeCase($table);
 
-        $sql .= "CREATE TABLE `$table` ($column_sql);\n";
-
-
-        //get table data array
         $table_data = $this->getData($data, $column);
 
-        $column_string = $this->getStringFromColumns($column);;
-        $data_string = $this->getStringFromData($table_data);
+        $last_columns = $column;
+        if ($this->need_id && array_search('id', array_column($column, 'name')) === false) {
 
-        //$sql .= "INSERT INTO `$table` ($column_string) $data_string;\n";
+            $last_columns[] = [
+                'name' => "id",
+                'type' => "int"
+            ];
+        }
 
-        return $sql;
+        return [
+            'tables' => [
+                'name' => $table,
+                'column' => $last_columns
+            ],
+            'data' => [
+                'table' => $table,
+                'data' => $table_data
+            ]
+        ];
     }
 
     /**
@@ -133,11 +127,11 @@ class JsonExtractor
         if (is_object($data)) {
             foreach ($data ?? [] as $Column => $Value) {
                 if (!is_array($Value) && !is_object($Value) && !empty($Column) && !is_numeric($Column)) {
-                    $Columns[] = ['name' => $Column, 'type' => gettype($this->getActualDataType($Value,""))];
+                    $Columns[] = ['name' => $Column, 'type' => gettype($this->getActualDataType($Value, ""))];
                 }
             }
         } elseif (is_array($data)) {
-            $Columns[] = ['name' => 'value', 'type' => gettype($this->getActualDataType($data[0],""))];
+            $Columns[] = ['name' => 'value', 'type' => gettype($this->getActualDataType($data[0], ""))];
         }
 
         return $Columns;
@@ -150,7 +144,6 @@ class JsonExtractor
      */
     function getData($data, $column)
     {
-
         $values = [];
 
         $index = 0;
@@ -158,16 +151,17 @@ class JsonExtractor
             foreach ($column as $column_item) {
                 switch (is_object($row_item)) {
                     case true:
-                        $values[$index][] = $this->getActualDataType(($row_item->{$column_item['name']}) ?? null, null);
+                        $values[$index][$column_item['name']] = $this->getActualDataType(($row_item->{$column_item['name']}) ?? null, null);
                         break;
                     case false:
-                        $values[$index][] = $this->getActualDataType($row_item, null);
+                        $values[$index][$column_item['name']] = $this->getActualDataType(($data->{$column_item['name']}) ?? null, null);
                         break;
                 }
 
             }
             $index++;
         }
+
 
         return $values;
 
@@ -201,10 +195,24 @@ class JsonExtractor
 
         $Highest = false;
         $ColumnCount = 0;
+        $HighestSub = 1;
 
         foreach ($array as $array_item) {
-            if ($ColumnCount < count($array_item)) {
-                $Highest = $array_item;
+
+            $current_sub = 0;
+            //check how many array/object have
+            foreach ($array_item as $SubTableName => $SubArrayItem) {
+                if (is_array($SubArrayItem) || is_object($SubArrayItem)) {
+                    $current_sub = $current_sub + 2;
+                }
+            }
+
+            //check how many column have
+            if ($ColumnCount <= count($array_item)) {
+                if ($current_sub > $HighestSub) {
+                    $Highest = $array_item;
+                    $HighestSub = $current_sub;
+                }
             }
         }
 
@@ -241,9 +249,7 @@ class JsonExtractor
      */
     public static function getStringFromColumns($array)
     {
-
         $String = [];
-
         foreach ($array as $column) {
             $String[] = "`" . JsonExtractor::snakeCase($column['name']) . "`";
         }

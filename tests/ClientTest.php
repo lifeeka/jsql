@@ -9,6 +9,8 @@ class ClientTest extends TestCase
 
     public function setUp()
     {
+        //ini_set('memory_limit', '2048M');
+
         $config['host'] = '127.0.0.1';
         $config['db'] = 'test';
         $config['username'] = 'test';
@@ -23,9 +25,8 @@ class ClientTest extends TestCase
     {
         $this->Client->clearDatabase();
         $this->Client->loadFile('sample2.json');
-         ($this->Client->toMysql());
         $this->Client->migrate();
-
-        //$this->assertInstanceOf(\PDOStatement::class, $this->Client->migrate());
     }
+
+
 }
