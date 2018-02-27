@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dfc93278497817a20f90dd4821f133b1",
+    "content-hash": "8079a70c6acb7f28891faf2cdcf5652c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -75,7 +75,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.6.5",
+            "version": "v5.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -119,7 +119,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.6.5",
+            "version": "v5.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -163,16 +163,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v5.6.5",
+            "version": "v5.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "c0b3f5cca36777d6f756d5f4b2b74ec932bd012f"
+                "reference": "03283cbe9b3f39573d2196daebb20be3e218c7ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/c0b3f5cca36777d6f756d5f4b2b74ec932bd012f",
-                "reference": "c0b3f5cca36777d6f756d5f4b2b74ec932bd012f",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/03283cbe9b3f39573d2196daebb20be3e218c7ca",
+                "reference": "03283cbe9b3f39573d2196daebb20be3e218c7ca",
                 "shasum": ""
             },
             "require": {
@@ -218,20 +218,20 @@
                 "orm",
                 "sql"
             ],
-            "time": "2018-02-22T19:20:38+00:00"
+            "time": "2018-02-27T14:02:09+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v5.6.5",
+            "version": "v5.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "ada40fd5fba4f51e456d38d8b17c826c519b33c7"
+                "reference": "c2dd9c94c4518fed1285b11e46eb381f81d916ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/ada40fd5fba4f51e456d38d8b17c826c519b33c7",
-                "reference": "ada40fd5fba4f51e456d38d8b17c826c519b33c7",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/c2dd9c94c4518fed1285b11e46eb381f81d916ee",
+                "reference": "c2dd9c94c4518fed1285b11e46eb381f81d916ee",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +275,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2018-02-22T15:02:07+00:00"
+            "time": "2018-02-26T14:00:30+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -2384,6 +2384,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.0"
+    },
     "platform-dev": []
 }

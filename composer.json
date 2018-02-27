@@ -2,6 +2,8 @@
   "name": "lifeeka/jsql",
   "type": "library",
   "license": "MIT",
+  "description": "Convert Json Object to SQL.",
+  "keywords": ["json", "sql", "mysql", "convert", "laravel"],
   "minimum-stability": "beta",
   "require": {
     "php": ">=7.0",
