@@ -43,14 +43,13 @@ class Json
      * @param $json
      * @return object
      */
-    function validate($json)
+    public function validate($json)
     {
-        if(is_array($json)){
+        if (is_array($json)) {
             return (object)[
                 $this->main_table_name=>$json
             ];
         }
         return $json;
-
     }
 }
