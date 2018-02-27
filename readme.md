@@ -1,4 +1,8 @@
-<p align="center"><img src="https://raw.githubusercontent.com/lifeeka/jsql/master/logo.png"></p>
+<p align="center">
+ 
+![](https://raw.githubusercontent.com/lifeeka/jsql/master/logo.png)
+
+</p>
 
 <br>
 
