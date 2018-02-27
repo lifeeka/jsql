@@ -1,6 +1,6 @@
 <p align="center">
  
-![](https://raw.githubusercontent.com/lifeeka/jsql/master/logo.png)
+![](http://i.imgur.com/7ZcCgnj.jpg)
 
 </p>
 
