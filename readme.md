@@ -14,7 +14,7 @@ Convert Json Object to SQL.
 composer require lifeeka/jsql
 ```
 
-## Usage
+### Usage
 ```php
 <?php
 

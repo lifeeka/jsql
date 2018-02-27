@@ -262,12 +262,13 @@ class JsonExtractor
         return implode(",", $String);
     }
 
+
     /**
      * @param $Data
-     * @param null $empty_val
-     * @return int|null|string
+     * @param $empty_val
+     * @return int|string
      */
-    public static function getActualDataType($Data, $empty_val = null)
+    public static function getActualDataType($Data, $empty_val)
     {
         $Data = trim($Data);
         if (is_numeric($Data)) {
