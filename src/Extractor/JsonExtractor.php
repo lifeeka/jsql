@@ -69,7 +69,6 @@ class JsonExtractor
                 $this->data[$table_data['data']['table']] = $table_data['data']['data'];
 
                 $this->toMysqlTables($this->getHighestColumnArray($value), $prefix . $table_name . '_');//get it inside tables
-
             } elseif (is_array($value) || is_object($value)) {//if it's a array and  firs element is not a object
 
                 $table_data = $this->getTable($prefix . $table_name, $value);
@@ -77,7 +76,6 @@ class JsonExtractor
                 $this->data[$table_data['data']['table']] = $table_data['data']['data'];
             }
         }
-
     }
 
 
@@ -91,14 +89,14 @@ class JsonExtractor
         $column = $this->getColumn($this->getHighestColumnArray($data));
 
 
-        if ($this->snake_case_table)
+        if ($this->snake_case_table) {
             $table = $this->snakeCase($table);
+        }
 
         $table_data = $this->getData($data, $column);
 
         $last_columns = $column;
         if ($this->need_id && array_search('id', array_column($column, 'name')) === false) {
-
             $last_columns[] = [
                 'name' => "id",
                 'type' => "int"
@@ -144,7 +142,7 @@ class JsonExtractor
      * @param $column
      * @return array
      */
-    function getData($data, $column)
+    public function getData($data, $column)
     {
         $values = [];
 
@@ -159,14 +157,12 @@ class JsonExtractor
                         $values[$index][$column_item['name']] = $this->getActualDataType(($data->{$column_item['name']}) ?? null, null);
                         break;
                 }
-
             }
             $index++;
         }
 
 
         return $values;
-
     }
 
     /**
@@ -193,22 +189,21 @@ class JsonExtractor
      */
     public static function getHighestColumnArray($array)
     {
-        if (is_object($array) || (is_array($array) && !is_object($array[0]) && !is_array($array[0])))
+        if (is_object($array) || (is_array($array) && !is_object($array[0]) && !is_array($array[0]))) {
             return $array;
+        }
 
         $Highest = false;
         $ColumnCount = false;
         $HighestSubCount = false;
 
         foreach ($array as $array_item) {
-
             $current_sub = 0;
             //check how many array/object have
             foreach ($array_item as $SubTableName => $SubArrayItem) {
                 if (is_array($SubArrayItem) || is_object($SubArrayItem)) {
                     $current_sub = $current_sub + 2;
                 }
-
             }
             //check how many column have
             if ($ColumnCount <= count($array_item) || !$Highest) {
@@ -237,10 +232,11 @@ class JsonExtractor
             foreach ($item_row as $item) {
                 if (empty($item) && !is_numeric($item)) {
                     $value[] = "null";
-                } elseif (is_numeric($item))
+                } elseif (is_numeric($item)) {
                     $value[] = $item;
-                else
+                } else {
                     $value[] = '"' . addcslashes($item, "W") . '"';
+                }
             }
             $String[] = '(' . implode(",", $value) . ')';
         }
@@ -273,9 +269,10 @@ class JsonExtractor
         $Data = trim($Data);
         if (is_numeric($Data)) {
             return $Data + 0;
-        } elseif (empty($Data))
+        } elseif (empty($Data)) {
             return $empty_val;
-        else
+        } else {
             return (string)$Data;
+        }
     }
 }
