@@ -57,6 +57,7 @@ class JsonExtractor
             $data = $this->json->toObject();
         }
 
+
         foreach ($data as $key => $value) {//loop the data
 
             $table_name = is_numeric($key) ? $this->main_table_name : $key;
@@ -88,6 +89,7 @@ class JsonExtractor
     public function getTable($table, $data)
     {
         $column = $this->getColumn($this->getHighestColumnArray($data));
+
 
         if ($this->snake_case_table)
             $table = $this->snakeCase($table);
@@ -176,6 +178,7 @@ class JsonExtractor
     {
         preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
         $ret = $matches[0];
+
         foreach ($ret as &$match) {
             $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
         }
@@ -194,8 +197,8 @@ class JsonExtractor
             return $array;
 
         $Highest = false;
-        $ColumnCount = 0;
-        $HighestSub = 1;
+        $ColumnCount = false;
+        $HighestSubCount = false;
 
         foreach ($array as $array_item) {
 
@@ -205,16 +208,18 @@ class JsonExtractor
                 if (is_array($SubArrayItem) || is_object($SubArrayItem)) {
                     $current_sub = $current_sub + 2;
                 }
-            }
 
+            }
             //check how many column have
-            if ($ColumnCount <= count($array_item)) {
-                if ($current_sub > $HighestSub) {
+            if ($ColumnCount <= count($array_item) || !$Highest) {
+                if ($current_sub > $HighestSubCount || !$Highest) {
                     $Highest = $array_item;
-                    $HighestSub = $current_sub;
+                    $HighestSubCount = $current_sub;
+                    $ColumnCount = count($array_item);
                 }
             }
         }
+
 
         return $Highest;
     }

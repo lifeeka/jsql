@@ -9,7 +9,6 @@ class ClientTest extends TestCase
 
     public function setUp()
     {
-        //ini_set('memory_limit', '2048M');
 
         $config['host'] = '127.0.0.1';
         $config['db'] = 'test';
@@ -24,7 +23,7 @@ class ClientTest extends TestCase
     public function testJsonExtractor()
     {
         $this->Client->clearDatabase();
-        $this->Client->loadFile('sample2.json');
+        $this->Client->loadFile('sample/sample2.json');
         $this->Client->migrate();
     }
 

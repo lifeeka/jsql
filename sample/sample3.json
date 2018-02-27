@@ -1,0 +1,90 @@
+{
+    "activityType" : "EXPERIENCE",
+    "destinationIds" : [ 
+        "Paris"
+    ],
+    "intercity" : false,
+    "sameCityReturn" : true,
+    "tags" : [ 
+        "Eiffel"
+    ],
+    "title" : "Paris exploration and Eiffel Tower visit [ 2nd Floor ] - Louvre Pyramid,Orsay Museum,Arc de Triomphe.",
+    "longDesc" : "<p>Enjoy a visit to the Eiffel Tower&mdash;a global cultural icon of France and one of the most famous structures in the world. After a comprehensive tour of Paris&#39; landmarks by coach, skip the long lines and ascend to the second-storey observation deck, where you can take in the magnificent view from 378 feet (115 metre) above the ground.Start your exploration of the French capital with an informative tour of the city&#39;s elegant boulevards, charm-filled districts&nbsp;and striking monuments. Board a comfortable coach in the centre of town and relax as you ride by sights like the glass pyramid of the Louvre, the Mus&eacute;e d&#39;Orsay&mdash;a Beaux-Arts train station converted into a mecca for Impressionist art&mdash;and the proud and stately Arc de Triomphe. An informative audio-guide provides running commentary and gives you insight into the city, past and present.After touring the city, make your way to its most iconic structure&mdash;the Eiffel Tower. Skip past the notoriously long lines and follow a guide up to the second level, where you can find a prime viewpoint to take in spectacular views over the zinc-roofed buildings below, the winding ribbon of the Seine, and locals picnicking on the manicured lawns of the Champ de Mars. Snap photos and learn fascinating stories and little-known facts about the Eiffel Tower&#39;s history, its construction in 1889 for the World&#39;s Fair, and its place in the hearts of not just the French, but anyone who&#39;s ever fallen in love with the City of Light. If you&#39;d like, opt to add on a cruise along the Seine to round out the perfect day of Parisian sightseeing.</p>",
+    "shortDesc" : "<p>An engaging trip to the 2nd-floor observation deck of Eiffel Tower.Skip long lines at the bottom with priority access admission. A chance to experience the famous global icon of France. Ample photo opportunities &amp; a bird&#39;s eye perspective of Paris.</p>",
+    "photos" : [ 
+        "http://www.svenluckermans.com/wp-content/uploads/2013/12/view-from-the-eiffel-tower.jpg", 
+        "", 
+        "https://citydiscovery2.imgix.net/13636__1432122956.jpg?w=960&h=723&auto=format&crop=faces", 
+        "entropy&fit=crop&q=60"
+    ],
+    "mainPhoto" : "https://d3lf10b5gahyby.cloudfront.net/activity/200001.jpg",
+    "rating" : 4.5,
+    "highlight" : true,
+    "openDays" : 1,
+    "availabilityTime" : "EVENING",
+    "active" : true,
+    "sourceProviderCode" : "FRA_006",
+    "ourProviderCode" : "FRA_006",
+    "termsConditions" : "",
+    "notes" : "<p>Children aged 3 and younger are complimentary.Your ticket to the Eiffel Tower is to the second-level observation deck only. Entrance tickets to the third floor of the Eiffel Tower can be purchased on site, if desired.</p>\r\n",
+    "interests" : [ 
+        16, 
+        9, 
+        74
+    ],
+    "themes" : [ 
+        0, 
+        1, 
+        2
+    ],
+    "mustSee" : false,
+    "defaultTourGrade" : {
+        "gradeCode" : "DEFAULT",
+        "departureTime" : "1600",
+        "gradeDescription" : "",
+        "duration" : 300,
+        "pickupType" : 1,
+        "meetingPoint" : "",
+        "internetProvider" : "SELF",
+        "ourProvider" : "SELF",
+        "inclusion" : "<ul><li>Skip-the-Line entrance to the Eiffel Tower</li><li>Guided tour of Paris</li></ul>",
+        "exclusion" : "<ul><li>Meals and Drinks</li><li>Hotel Pick up and drop</li></ul>",
+        "maxAgeForBand" : [ 
+            3, 
+            11, 
+            99
+        ],
+        "internetCostForBand" : [ 
+            0.0, 
+            2298.0, 
+            4040.0
+        ],
+        "ourCostForBand" : [ 
+            0.0, 
+            2298.0, 
+            4040.0
+        ],
+        "startSlot" : "EVENING",
+        "durationType" : "QUARTER",
+        "transferType" : "NOTRANSFER",
+        "destinations" : [ 
+            {
+                "from" : "Paris",
+                "to" : []
+            }
+        ]
+    },
+    "currency" : "INR",
+    "transferCostDetail" : {
+        "maxPeople" : 0,
+        "cost" : 0.0
+    },
+    "ticket" : false,
+    "fastSelling" : false,
+    "privateTour" : false,
+    "freeTour" : false,
+    "kidFriendly" : true,
+    "latitude" : 48.8610229492188,
+    "longitude" : 2.33575177192688,
+    "mustHave" : false
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f854b827efd949eda12cf4d15ea2e7ec",
+    "content-hash": "dfc93278497817a20f90dd4821f133b1",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -759,6 +759,49 @@
             "time": "2015-04-20T18:58:01+00:00"
         },
         {
+            "name": "mdurrant/php-console-color",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mdurrant/php-console-color.git",
+                "reference": "ef54021fedaf591f7c478d5f2aa071afb9f275b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mdurrant/php-console-color/zipball/ef54021fedaf591f7c478d5f2aa071afb9f275b8",
+                "reference": "ef54021fedaf591f7c478d5f2aa071afb9f275b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpConsoleColor\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Durrant",
+                    "email": "mdurrant@gmail.com"
+                }
+            ],
+            "description": "Extremely simple library for writing to the console in color",
+            "time": "2015-03-18T07:58:04+00:00"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.7.0",
             "source": {
@@ -1433,16 +1476,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.0.1",
+            "version": "7.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "316555dbd0ed4097bbdd17c65ab416bf27a472e9"
+                "reference": "e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/316555dbd0ed4097bbdd17c65ab416bf27a472e9",
-                "reference": "316555dbd0ed4097bbdd17c65ab416bf27a472e9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9",
+                "reference": "e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9",
                 "shasum": ""
             },
             "require": {
@@ -1509,7 +1552,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-02-13T06:08:08+00:00"
+            "time": "2018-02-26T07:03:12+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
