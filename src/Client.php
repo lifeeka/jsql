@@ -67,7 +67,6 @@ class Client
         $JsonExtractor->toMysqlTables();
         $this->createTables($JsonExtractor);
         return $this->insertData($JsonExtractor);
-
     }
 
     /**
@@ -75,16 +74,10 @@ class Client
      */
     private function createTables(JsonExtractor $JsonExtractor)
     {
-
-
         foreach ($JsonExtractor->getTablesArray() as $TableName => $TableColumn) {
-
             $this->capsule::schema()->dropIfExists($TableName);
             $this->capsule::schema()->create($TableName, function ($table) use ($TableColumn) {
-
-
                 foreach ($TableColumn as $column_item) {
-
                     switch ($column_item['type']) {
                         case 'int':
                             $table->increments($column_item['name']);
@@ -98,14 +91,12 @@ class Client
                         case 'double':
                             $table->double($column_item['name'])->nullable();
                             break;
-                        default :
+                        default:
                             $table->text($column_item['name'])->nullable();
                             break;
 
                     }
                 }
-
-
             });
         }
     }
@@ -124,6 +115,5 @@ class Client
 
     public function clearDatabase()
     {
-
     }
 }
