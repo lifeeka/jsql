@@ -9,6 +9,7 @@ class ClientTest extends TestCase
 
     public function setUp()
     {
+
         $config['host'] = '127.0.0.1';
         $config['db'] = 'test';
         $config['username'] = 'test';
@@ -22,11 +23,9 @@ class ClientTest extends TestCase
     public function testJsonExtractor()
     {
         $this->Client->clearDatabase();
-        $this->Client->loadFile('sample.json');
-        $this->Client->toMysql();
-
-        ($this->Client->toMysql());
-
-        $this->assertInstanceOf(\PDOStatement::class, $this->Client->migrate());
+        $this->Client->loadFile('sample/sample2.json');
+        $this->Client->migrate();
     }
+
+
 }

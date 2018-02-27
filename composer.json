@@ -4,15 +4,21 @@
   "license": "MIT",
   "minimum-stability": "beta",
   "require": {
+    "illuminate/database": "^5.6"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.0"
+    "phpunit/phpunit": "^7.0",
+    "nunomaduro/collision": "^2.0",
+    "mdurrant/php-console-color": "^1.0"
 
   },
   "autoload": {
     "psr-4": {
       "lifeeka\\jsql\\": "src"
-    }
+    },
+    "files": [
+      "helpers.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
