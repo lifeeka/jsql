@@ -1,8 +1,4 @@
-<p align="center">
- 
-![](http://i.imgur.com/7ZcCgnj.jpg)
-
-</p>
+<p align="center"><img src="https://imgur.com/hGzLkvc"></p>
 
 <br>
 
