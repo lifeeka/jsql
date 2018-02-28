@@ -284,12 +284,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "bee07217330b391601dde67ead27b0ae2f24be58"
+                "reference": "4a874a39b2b00d7e0146cd46fab6f47c41ce9e65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bee07217330b391601dde67ead27b0ae2f24be58",
-                "reference": "bee07217330b391601dde67ead27b0ae2f24be58",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4a874a39b2b00d7e0146cd46fab6f47c41ce9e65",
+                "reference": "4a874a39b2b00d7e0146cd46fab6f47c41ce9e65",
                 "shasum": ""
             },
             "require": {
@@ -329,7 +329,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-02-27T11:15:38+00:00"
+            "time": "2018-02-28T09:22:05+00:00"
         },
         {
             "name": "psr/container",
@@ -1479,12 +1479,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a5f2f7cb4ab29b6da947b57a3415edbf7bebe351"
+                "reference": "c5f89f82760f010d9206a48ce3302730849f2931"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a5f2f7cb4ab29b6da947b57a3415edbf7bebe351",
-                "reference": "a5f2f7cb4ab29b6da947b57a3415edbf7bebe351",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c5f89f82760f010d9206a48ce3302730849f2931",
+                "reference": "c5f89f82760f010d9206a48ce3302730849f2931",
                 "shasum": ""
             },
             "require": {
@@ -1551,7 +1551,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-02-26T07:04:15+00:00"
+            "time": "2018-02-28T11:31:29+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

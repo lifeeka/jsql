@@ -28,7 +28,7 @@ composer require lifeeka/jsql
     $config['username'] = 'test';
     $config['password'] = 'test';
     
-    $Client = new lifeeka\jsql\Client($config);
+    $Client = new Lifeeka\JSQL\Client($config);
     $Client->loadFile('sample/sample2.json');
     $Client->migrate();
         

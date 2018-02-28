@@ -1,8 +1,11 @@
 <?php
 
-use lifeeka\jsql\Client;
+use Lifeeka\JSQL\Client;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class ClientTest
+ */
 class ClientTest extends TestCase
 {
     public $Client;

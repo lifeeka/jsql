@@ -1,8 +1,8 @@
 <?php
 
-namespace lifeeka\jsql\Extractor;
+namespace Lifeeka\JSQL\Extractor;
 
-use lifeeka\jsql\Helpers\Json;
+use Lifeeka\JSQL\Helpers\Json;
 
 /**
  * Class JsonExtractor.

@@ -1,6 +1,6 @@
 <?php
 
-namespace lifeeka\jsql\Extractor;
+namespace Lifeeka\JSQL\Extractor;
 
 /**
  * Class MysqlExtractor.

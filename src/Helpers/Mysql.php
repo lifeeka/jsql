@@ -1,6 +1,6 @@
 <?php
 
-namespace lifeeka\jsql\Helpers;
+namespace Lifeeka\JSQL\Helpers;
 
 /**
  * Class Mysql.

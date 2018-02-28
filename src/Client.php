@@ -1,9 +1,9 @@
 <?php
 
-namespace lifeeka\jsql;
+namespace Lifeeka\JSQL;
 
-use lifeeka\jsql\Extractor\JsonExtractor;
-use lifeeka\jsql\Helpers\Json;
+use Lifeeka\JSQL\Extractor\JsonExtractor;
+use Lifeeka\JSQL\Helpers\Json;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 /**
