@@ -11,10 +11,15 @@ use Illuminate\Database\Capsule\Manager as Capsule;
  */
 class Client
 {
+    const TABLE_ONLY = "table_only";
+    const DATA_ONLY = "data_only";
+    const ALL = "all";
+
     public $capsule;
     public $error = false;
     public $file_content = null;
     public $sql = null;
+
 
     /**
      * Client constructor.
@@ -77,14 +82,34 @@ class Client
 
 
     /**
+     * @param string $type
      * @return bool
      */
-    public function migrate()
+    public function migrate($type = Client::ALL)
     {
+
+
         $JsonExtractor = new JsonExtractor(new Json($this->file_content));
         $JsonExtractor->toMysqlTables();
-        $this->createTables($JsonExtractor);
-        return $this->insertData($JsonExtractor);
+
+        switch ($type) {
+            case Client::DATA_ONLY:
+                $JsonExtractor->toMysqlData();
+                $this->insertData($JsonExtractor);
+                break;
+            case Client::TABLE_ONLY:
+                $this->createTables($JsonExtractor);
+                break;
+            default:
+                $JsonExtractor->toMysqlData();
+                $this->createTables($JsonExtractor);
+                $this->insertData($JsonExtractor);
+                break;
+        }
+
+        return true;
+
+
     }
 
     /**

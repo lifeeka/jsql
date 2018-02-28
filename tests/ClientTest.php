@@ -1,5 +1,6 @@
 <?php
 
+require_once "helpers.php";
 use Lifeeka\JSQL\Client;
 use PHPUnit\Framework\TestCase;
 
@@ -27,7 +28,7 @@ class ClientTest extends TestCase
     {
         $this->Client->clearDatabase();
         $this->Client->loadFile('sample/sample2.json');
-        $this->Client->migrate();
+        $this->assertTrue($this->Client->migrate());
     }
 
 

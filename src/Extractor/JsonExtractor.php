@@ -57,7 +57,6 @@ class JsonExtractor
             $data = $this->json->toObject();
         }
 
-
         foreach ($data as $key => $value) {//loop the data
 
             $table_name = is_numeric($key) ? $this->main_table_name : $key;
@@ -65,17 +64,43 @@ class JsonExtractor
             if (is_array($value) && is_object($value[0])) {//check whether it's a array and it's firs element is a object
 
                 $table_data = $this->getTable($prefix . $table_name, $value);//get table sql
-                $this->table[$table_data['tables']['name']] = $table_data['tables']['column'];
-                $this->data[$table_data['data']['table']] = $table_data['data']['data'];
+                $this->table[$table_data['name']] = $table_data['column'];
 
                 $this->toMysqlTables($this->getHighestColumnArray($value), $prefix . $table_name . '_');//get it inside tables
             } elseif (is_array($value) || is_object($value)) {//if it's a array and  firs element is not a object
 
                 $table_data = $this->getTable($prefix . $table_name, $value);
-                $this->table[$table_data['tables']['name']] = $table_data['tables']['column'];
-                $this->data[$table_data['data']['table']] = $table_data['data']['data'];
+                $this->table[$table_data['name']] = $table_data['column'];
             }
+
         }
+    }
+
+
+    public function toMysqlData($data = false, $prefix = '')
+    {
+
+        if (!$data) {//if this is not a recursive
+            $data = $this->json->toObject();
+        }
+        foreach ($data as $table_name => $value) {
+            if ($this->snake_case_table) {
+                $table_name = $this->snakeCase($prefix . $table_name);
+            }
+
+            if (is_array($value)) {//if it's a array and  firs element is not a object
+                $this->toMysqlData($value, $table_name . '_');
+            } elseif (is_object($value)) {
+                $this->toMysqlData($value, $table_name . '_');
+            }
+
+
+        }
+    }
+
+    //TODO
+    public function getTableData(){
+
     }
 
 
@@ -88,12 +113,9 @@ class JsonExtractor
     {
         $column = $this->getColumn($this->getHighestColumnArray($data));
 
-
         if ($this->snake_case_table) {
             $table = $this->snakeCase($table);
         }
-
-        $table_data = $this->getData($data, $column);
 
         $last_columns = $column;
         if ($this->need_id && array_search('id', array_column($column, 'name')) === false) {
@@ -104,14 +126,8 @@ class JsonExtractor
         }
 
         return [
-            'tables' => [
-                'name' => $table,
-                'column' => $last_columns
-            ],
-            'data' => [
-                'table' => $table,
-                'data' => $table_data
-            ]
+            'name' => $table,
+            'column' => $last_columns
         ];
     }
 
@@ -144,6 +160,7 @@ class JsonExtractor
      */
     public function getData($data, $column)
     {
+
         $values = [];
 
         $index = 0;

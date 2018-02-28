@@ -1,0 +1,19 @@
+[
+  {
+    "code": 59456,
+    "name": {
+      "content": "Dorsett Kuala Lumpur"
+    },
+    "destinationCode": "KUL",
+    "categoryCode": "4EST"
+  },
+  {
+    "code": 59457,
+    "name": {
+      "content": "Seri Pacific Hotel Kuala Lumpur"
+    },
+    "destinationCode": "KUL",
+    "categoryCode": "5EST"
+  }
+]
+
