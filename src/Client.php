@@ -39,6 +39,24 @@ class Client
         $this->capsule->setAsGlobal();
     }
 
+
+    /**
+     * @param String $text
+     * @return bool
+     */
+    public function loadText(String $text)
+    {
+        try {
+            $this->file_content = $text;
+
+            return true;
+        } catch (\Exception $e) {
+            $this->error = $e->getMessage();
+
+            return false;
+        }
+    }
+
     /**
      * @param $file_name
      *
