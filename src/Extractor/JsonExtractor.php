@@ -125,7 +125,7 @@ class JsonExtractor
                     $DataItem[] = ['value' => $item_value];
                 }
 
-                $this->data[$table_name] =  array_unique(array_merge(($this->data[$table_name]??[]), $DataItem));
+                $this->data[$table_name] =  array_map("unserialize", array_unique(array_map("serialize", (array_merge(($this->data[$table_name]??[]), $DataItem)))));
             }
         }
     }
