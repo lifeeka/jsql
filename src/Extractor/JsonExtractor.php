@@ -156,7 +156,7 @@ class JsonExtractor
         if ($this->snake_case_column) {
             return [
                 'name' => $table,
-                'column' => array_map(function($item) {
+                'column' => array_map(function ($item) {
                     return [
                         'name' => $this->snakeCase($item['name']),
                         'type' => $item['type']
