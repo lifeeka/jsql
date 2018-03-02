@@ -77,8 +77,13 @@ class JsonExtractor
     }
 
 
+    /**
+     * @param bool $data
+     * @param string $prefix
+     */
     public function toMysqlData($data = false, $prefix = '')
     {
+
 
         if (!$data) {//if this is not a recursive
             $data = $this->json->toObject();
@@ -87,19 +92,56 @@ class JsonExtractor
             if ($this->snake_case_table) {
                 $table_name = $this->snakeCase($prefix . $table_name);
             }
+            if (is_array($value) && is_object($value[0])) {//if it's a array and  firs element is not a object
+                $this->toMysqlData($value, $table_name . '_');
 
-            if (is_array($value)) {//if it's a array and  firs element is not a object
+            } elseif (is_object($value) || is_array($value)) {
                 $this->toMysqlData($value, $table_name . '_');
-            } elseif (is_object($value)) {
-                $this->toMysqlData($value, $table_name . '_');
+                $this->getTableData($table_name, $value);
+
+            }
+        }
+
+
+    }
+
+    /**
+     * @param $table_name
+     * @param $value
+     */
+    public function getTableData($table_name, $value)
+    {
+
+        if (isset($this->table[$table_name])) {
+
+            $ColumnList = $this->table[$table_name];
+
+            $DataItem = [];
+
+            if (is_object($value)) {
+                foreach ($ColumnList as $key => $ColumnItem) {
+                    if ($this->isPropertyExist($value, $ColumnItem['name'])) {
+                        $CurrentItem = $this->snake_case_column ? $this->objectToSnakeCase($value) : $value;
+                        $column_name = $ColumnItem['name'];
+                        $DataItem[$column_name] = $CurrentItem->{$ColumnItem['name']};
+                    } else {
+                        $column_name = $ColumnItem['name'];
+                        $DataItem[$column_name] = null;
+                    }
+                }
+                $this->data[$table_name][] = $DataItem;
+
+            } elseif (is_array($value)) {//reference table
+                foreach ($value as $item_value)
+                    $DataItem[] = ['value' => $item_value];
+
+                $this->data[$table_name] =  array_merge(($this->data[$table_name]??[]),$DataItem);
+
             }
 
 
         }
-    }
 
-    //TODO
-    public function getTableData(){
 
     }
 
@@ -125,10 +167,23 @@ class JsonExtractor
             ];
         }
 
-        return [
-            'name' => $table,
-            'column' => $last_columns
-        ];
+        if ($this->snake_case_column)
+            return [
+                'name' => $table,
+                'column' => array_map(function ($item) {
+                    return [
+                        'name' => $this->snakeCase($item['name']),
+                        'type' => $item['type']
+                    ];
+
+                }, $last_columns)
+            ];
+
+        else
+            return [
+                'name' => $table,
+                'column' => $last_columns
+            ];
     }
 
     /**
@@ -197,6 +252,39 @@ class JsonExtractor
         }
 
         return implode('_', $ret);
+    }
+
+    /**
+     * @param $Object
+     * @return \stdClass
+     */
+    public static function objectToSnakeCase($Object)
+    {
+        $ReturnObject = new \stdClass();
+
+        foreach ($Object as $ObjectAttribute => $ObjectItem) {
+            $ReturnObject->{JsonExtractor::snakeCase($ObjectAttribute)} = $ObjectItem;
+        }
+        return $ReturnObject;
+    }
+
+
+    /**
+     * @param Object $Object
+     * @param $Attribute
+     * @return bool
+     */
+    public function isPropertyExist($Object, $Attribute)
+    {
+        foreach ($Object as $CurrentAttributeName => $CurrentAttribute) {
+            if ($this->snake_case_column && $this->snakeCase($CurrentAttributeName) == $Attribute) {
+                return true;
+            } elseif ($CurrentAttributeName === $Attribute) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
