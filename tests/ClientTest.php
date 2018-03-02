@@ -27,7 +27,7 @@ class ClientTest extends TestCase
     public function testJsonExtractor()
     {
         $this->Client->clearDatabase();
-        $this->Client->loadFile('sample/sample.json');
+        $this->Client->loadFile('sample/sample4.json');
         $this->assertTrue($this->Client->migrate());
     }
 

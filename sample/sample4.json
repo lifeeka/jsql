@@ -5,7 +5,21 @@
       "content": "Dorsett Kuala Lumpur"
     },
     "destinationCode": "KUL",
-    "categoryCode": "4EST"
+    "categoryCode": "4EST",
+    "phones": [
+      {
+        "phoneNumber": "0060327161225",
+        "phoneType": "PHONEBOOKING"
+      },
+      {
+        "phoneNumber": "0060327161000",
+        "phoneType": "PHONEHOTEL"
+      },
+      {
+        "phoneNumber": "0060327155000",
+        "phoneType": "FAXNUMBER"
+      }
+    ]
   },
   {
     "code": 59457,
@@ -13,7 +27,21 @@
       "content": "Seri Pacific Hotel Kuala Lumpur"
     },
     "destinationCode": "KUL",
-    "categoryCode": "5EST"
+    "categoryCode": "5EST",
+    "phones": [
+      {
+        "phoneNumber": "0060327161225",
+        "phoneType": "PHONEBOOKING"
+      },
+      {
+        "phoneNumber": "0060327161000",
+        "phoneType": "PHONEHOTEL"
+      },
+      {
+        "phoneNumber": "0060327155000",
+        "phoneType": "FAXNUMBER"
+      }
+    ]
   }
 ]
 

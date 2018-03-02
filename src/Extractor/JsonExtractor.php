@@ -13,6 +13,7 @@ class JsonExtractor
 
     private $table = [];
     private $data = [];
+    private $foreign = [];
 
     public $need_id = true;
     public $snake_case_column = true;
@@ -40,6 +41,14 @@ class JsonExtractor
     /**
      * @return array
      */
+    public function getForeignKeyArray()
+    {
+        return $this->foreign;
+    }
+
+    /**
+     * @return array
+     */
     public function getDataArray()
     {
         return $this->data;
@@ -52,6 +61,8 @@ class JsonExtractor
      */
     public function toMysqlTables($data = false, $prefix = '')
     {
+
+
         if (!$data) {//if this is not a recursive
             $data = $this->json->toObject();
         }
@@ -60,15 +71,16 @@ class JsonExtractor
 
             $table_name = is_numeric($key) ? $this->main_table_name : $key;
 
+
             if (is_array($value) && is_object($value[0])) {//check whether it's a array and it's firs element is a object
 
-                $table_data = $this->getTable($prefix.$table_name, $value); //get table sql
+                $table_data = $this->getTable($prefix . $table_name, $value); //get table sql
                 $this->table[$table_data['name']] = $table_data['column'];
 
-                $this->toMysqlTables($this->getHighestColumnArray($value), $prefix.$table_name.'_'); //get it inside tables
+                $this->toMysqlTables($this->getHighestColumnArray($value), $prefix . $table_name . "_", $prefix . $table_name); //get it inside tables
             } elseif (is_array($value) || is_object($value)) {//if it's a array and  firs element is not a object
 
-                $table_data = $this->getTable($prefix.$table_name, $value);
+                $table_data = $this->getTable($prefix . $table_name, $value);
                 $this->table[$table_data['name']] = $table_data['column'];
             }
         }
@@ -81,6 +93,7 @@ class JsonExtractor
      */
     public function toMysqlData($data = false, $prefix = '')
     {
+
         if (!$data) {//if this is not a recursive
             $data = $this->json->toObject();
         }
@@ -97,12 +110,14 @@ class JsonExtractor
         }
     }
 
+
     /**
      * @param $table_name
      * @param $value
      */
     public function getTableData($table_name, $value)
     {
+
         if (isset($this->table[$table_name])) {
             $ColumnList = $this->table[$table_name];
 
@@ -125,11 +140,10 @@ class JsonExtractor
                     $DataItem[] = ['value' => $item_value];
                 }
 
-                $this->data[$table_name] =  array_map("unserialize", array_unique(array_map("serialize", (array_merge(($this->data[$table_name]??[]), $DataItem)))));
+                $this->data[$table_name] = array_merge(($this->data[$table_name] ?? []), $DataItem);
             }
         }
     }
-
 
     /**
      * @param $table
@@ -144,14 +158,6 @@ class JsonExtractor
             $table = $this->snakeCase($table);
         }
 
-        $last_columns = $column;
-        if ($this->need_id && array_search('id', array_column($column, 'name')) === false) {
-            $last_columns[] = [
-                'name' => "id",
-                'type' => "int"
-            ];
-        }
-
         if ($this->snake_case_column) {
             return [
                 'name' => $table,
@@ -160,12 +166,12 @@ class JsonExtractor
                         'name' => $this->snakeCase($item['name']),
                         'type' => $item['type']
                     ];
-                }, $last_columns)
+                }, $column)
             ];
         } else {
             return [
                 'name' => $table,
-                'column' => $last_columns
+                'column' => $column
             ];
         }
     }
@@ -323,13 +329,13 @@ class JsonExtractor
                 } elseif (is_numeric($item)) {
                     $value[] = $item;
                 } else {
-                    $value[] = '"'.addcslashes($item, "W").'"';
+                    $value[] = '"' . addcslashes($item, "W") . '"';
                 }
             }
-            $String[] = '('.implode(",", $value).')';
+            $String[] = '(' . implode(",", $value) . ')';
         }
 
-        return "values".implode(", ", $String);
+        return "values" . implode(", ", $String);
     }
 
     /**
@@ -340,7 +346,7 @@ class JsonExtractor
     {
         $String = [];
         foreach ($array as $column) {
-            $String[] = "`".JsonExtractor::snakeCase($column['name'])."`";
+            $String[] = "`" . JsonExtractor::snakeCase($column['name']) . "`";
         }
 
         return implode(",", $String);
@@ -360,7 +366,7 @@ class JsonExtractor
         } elseif (empty($Data)) {
             return $empty_val;
         } else {
-            return (string) $Data;
+            return (string)$Data;
         }
     }
 }

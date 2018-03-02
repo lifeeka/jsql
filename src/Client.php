@@ -54,7 +54,6 @@ class Client
     {
         try {
             $this->file_content = $text;
-
             return true;
         } catch (\Exception $e) {
             $this->error = $e->getMessage();
@@ -114,6 +113,7 @@ class Client
      */
     private function createTables(JsonExtractor $JsonExtractor)
     {
+        //create tables
         foreach ($JsonExtractor->getTablesArray() as $TableName => $TableColumn) {
             $this->capsule::schema()->dropIfExists($TableName);
             $this->capsule::schema()->create($TableName, function ($table) use ($TableColumn) {
@@ -131,12 +131,22 @@ class Client
                         case 'double':
                             $table->double($column_item['name'])->nullable();
                             break;
+                        case 'foreign':
+                            $table->integer($column_item['name'])->unsigned();
+                            break;
                         default:
                             $table->text($column_item['name'])->nullable();
                             break;
 
                     }
                 }
+            });
+        }
+
+        //add foreign keys
+        foreach ($JsonExtractor->getForeignKeyArray() as $TableName => $TableData) {
+            $this->capsule::schema()->table($TableName, function ($table) use ($TableData) {
+                //$table->foreign($TableData['name'], $TableData['name'] . $TableData['table'])->references('id')->on($TableData['table']);
             });
         }
     }
