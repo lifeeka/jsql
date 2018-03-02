@@ -115,7 +115,7 @@ class Client
     {
         foreach ($JsonExtractor->getTablesArray() as $TableName => $TableColumn) {
             $this->capsule::schema()->dropIfExists($TableName);
-            $this->capsule::schema()->create($TableName, function ($table) use ($TableColumn) {
+            $this->capsule::schema()->create($TableName, function($table) use ($TableColumn) {
                 foreach ($TableColumn as $column_item) {
                     switch ($column_item['type']) {
                         case 'int':
