@@ -16,7 +16,7 @@ Convert Json Object to SQL.
 ### Installation
 
 ```
-composer require lifeeka/jsql
+composer require lifeeka/jsql:dev-master
 ```
 
 ### Usage

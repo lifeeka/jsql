@@ -49,7 +49,6 @@ class JsonExtractor
     /**
      * @param bool $data
      * @param string $prefix
-     * @return string
      */
     public function toMysqlTables($data = false, $prefix = '')
     {
