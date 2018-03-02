@@ -87,8 +87,6 @@ class Client
      */
     public function migrate($type = Client::ALL)
     {
-
-
         $JsonExtractor = new JsonExtractor(new Json($this->file_content));
         $JsonExtractor->toMysqlTables();
 
@@ -108,8 +106,6 @@ class Client
         }
 
         return true;
-
-
     }
 
     /**

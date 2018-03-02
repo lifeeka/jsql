@@ -72,7 +72,6 @@ class JsonExtractor
                 $table_data = $this->getTable($prefix . $table_name, $value);
                 $this->table[$table_data['name']] = $table_data['column'];
             }
-
         }
     }
 
@@ -83,8 +82,6 @@ class JsonExtractor
      */
     public function toMysqlData($data = false, $prefix = '')
     {
-
-
         if (!$data) {//if this is not a recursive
             $data = $this->json->toObject();
         }
@@ -94,15 +91,11 @@ class JsonExtractor
             }
             if (is_array($value) && is_object($value[0])) {//if it's a array and  firs element is not a object
                 $this->toMysqlData($value, $table_name . '_');
-
             } elseif (is_object($value) || is_array($value)) {
                 $this->toMysqlData($value, $table_name . '_');
                 $this->getTableData($table_name, $value);
-
             }
         }
-
-
     }
 
     /**
@@ -111,9 +104,7 @@ class JsonExtractor
      */
     public function getTableData($table_name, $value)
     {
-
         if (isset($this->table[$table_name])) {
-
             $ColumnList = $this->table[$table_name];
 
             $DataItem = [];
@@ -130,19 +121,14 @@ class JsonExtractor
                     }
                 }
                 $this->data[$table_name][] = $DataItem;
-
             } elseif (is_array($value)) {//reference table
-                foreach ($value as $item_value)
+                foreach ($value as $item_value) {
                     $DataItem[] = ['value' => $item_value];
+                }
 
-                $this->data[$table_name] =  array_merge(($this->data[$table_name]??[]),$DataItem);
-
+                $this->data[$table_name] =  array_merge(($this->data[$table_name]??[]), $DataItem);
             }
-
-
         }
-
-
     }
 
 
@@ -167,7 +153,7 @@ class JsonExtractor
             ];
         }
 
-        if ($this->snake_case_column)
+        if ($this->snake_case_column) {
             return [
                 'name' => $table,
                 'column' => array_map(function ($item) {
@@ -175,15 +161,14 @@ class JsonExtractor
                         'name' => $this->snakeCase($item['name']),
                         'type' => $item['type']
                     ];
-
                 }, $last_columns)
             ];
-
-        else
+        } else {
             return [
                 'name' => $table,
                 'column' => $last_columns
             ];
+        }
     }
 
     /**
@@ -215,7 +200,6 @@ class JsonExtractor
      */
     public function getData($data, $column)
     {
-
         $values = [];
 
         $index = 0;
