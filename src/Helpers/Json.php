@@ -46,7 +46,7 @@ class Json
     public function validate($json)
     {
         if (is_array($json)) {
-            return (object)[
+            return (object) [
                 $this->main_table_name=>$json
             ];
         }

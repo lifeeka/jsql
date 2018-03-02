@@ -63,13 +63,13 @@ class JsonExtractor
 
             if (is_array($value) && is_object($value[0])) {//check whether it's a array and it's firs element is a object
 
-                $table_data = $this->getTable($prefix . $table_name, $value);//get table sql
+                $table_data = $this->getTable($prefix.$table_name, $value); //get table sql
                 $this->table[$table_data['name']] = $table_data['column'];
 
-                $this->toMysqlTables($this->getHighestColumnArray($value), $prefix . $table_name . '_');//get it inside tables
+                $this->toMysqlTables($this->getHighestColumnArray($value), $prefix.$table_name.'_'); //get it inside tables
             } elseif (is_array($value) || is_object($value)) {//if it's a array and  firs element is not a object
 
-                $table_data = $this->getTable($prefix . $table_name, $value);
+                $table_data = $this->getTable($prefix.$table_name, $value);
                 $this->table[$table_data['name']] = $table_data['column'];
             }
         }
@@ -156,7 +156,7 @@ class JsonExtractor
         if ($this->snake_case_column) {
             return [
                 'name' => $table,
-                'column' => array_map(function ($item) {
+                'column' => array_map(function($item) {
                     return [
                         'name' => $this->snakeCase($item['name']),
                         'type' => $item['type']
@@ -324,13 +324,13 @@ class JsonExtractor
                 } elseif (is_numeric($item)) {
                     $value[] = $item;
                 } else {
-                    $value[] = '"' . addcslashes($item, "W") . '"';
+                    $value[] = '"'.addcslashes($item, "W").'"';
                 }
             }
-            $String[] = '(' . implode(",", $value) . ')';
+            $String[] = '('.implode(",", $value).')';
         }
 
-        return "values" . implode(", ", $String);
+        return "values".implode(", ", $String);
     }
 
     /**
@@ -341,7 +341,7 @@ class JsonExtractor
     {
         $String = [];
         foreach ($array as $column) {
-            $String[] = "`" . JsonExtractor::snakeCase($column['name']) . "`";
+            $String[] = "`".JsonExtractor::snakeCase($column['name'])."`";
         }
 
         return implode(",", $String);
@@ -361,7 +361,7 @@ class JsonExtractor
         } elseif (empty($Data)) {
             return $empty_val;
         } else {
-            return (string)$Data;
+            return (string) $Data;
         }
     }
 }
