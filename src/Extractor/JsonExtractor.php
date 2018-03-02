@@ -88,7 +88,7 @@ class JsonExtractor
             if ($this->snake_case_table) {
                 $table_name = $this->snakeCase($prefix . $table_name);
             }
-            if (is_array($value) && is_object($value[0])) {//if it's a array and  firs element is not a object
+            if (is_array($value) && !empty($value) && is_object($value[0])) {//if it's a array and  firs element is not a object
                 $this->toMysqlData($value, $table_name . '_');
             } elseif (is_object($value) || is_array($value)) {
                 $this->toMysqlData($value, $table_name . '_');
@@ -125,7 +125,7 @@ class JsonExtractor
                     $DataItem[] = ['value' => $item_value];
                 }
 
-                $this->data[$table_name] =  array_merge(($this->data[$table_name]??[]), $DataItem);
+                $this->data[$table_name] =  array_unique(array_merge(($this->data[$table_name]??[]), $DataItem));
             }
         }
     }
