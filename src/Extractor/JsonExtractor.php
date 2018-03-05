@@ -152,7 +152,7 @@ class JsonExtractor
      */
     public function getTable($table, $data)
     {
-        $column = $this->getColumn($this->getHighestColumnArray($data));
+        $column = $this->getColumn($this->getHighestColumnArray($data), $table);
 
         if ($this->snake_case_table) {
             $table = $this->snakeCase($table);
@@ -164,7 +164,8 @@ class JsonExtractor
                 'column' => array_map(function ($item) {
                     return [
                         'name' => $this->snakeCase($item['name']),
-                        'type' => $item['type']
+                        'type' => $item['type'],
+                        'ref' => $item['ref'] ?? null
                     ];
                 }, $column)
             ];
@@ -176,25 +177,34 @@ class JsonExtractor
         }
     }
 
+
     /**
      * @param $data
-     *
+     * @param $table
      * @return array
      */
-    public function getColumn($data)
+    public function getColumn($data, $table)
     {
+
+        $ForeignKeys = $this->json->getForeignKeys();
+
         $Columns = [];
 
         if (is_object($data)) {
             foreach ($data ?? [] as $Column => $Value) {
                 if (!is_array($Value) && !is_object($Value) && !empty($Column) && !is_numeric($Column)) {
-                    $Columns[] = ['name' => $Column, 'type' => gettype($this->getActualDataType($Value, ""))];
+
+                    if (isset($ForeignKeys[JsonExtractor::snakeCase($table)]) && $ForeignKeys[JsonExtractor::snakeCase($table)]['name'] == JsonExtractor::snakeCase($Column))
+                        $Columns[] = ['name' => $Column, 'type' => 'foreign_key', 'ref' => $ForeignKeys[JsonExtractor::snakeCase($table)]['ref']];
+                    elseif ($Column == 'id')
+                        $Columns[] = ['name' => $Column, 'type' => 'primary_key'];
+                    else
+                        $Columns[] = ['name' => $Column, 'type' => gettype($this->getActualDataType($Value, ""))];
                 }
             }
         } elseif (is_array($data)) {
             $Columns[] = ['name' => 'value', 'type' => gettype($this->getActualDataType($data[0], ""))];
         }
-
         return $Columns;
     }
 

@@ -19,27 +19,395 @@
         "phoneNumber": "0060327155000",
         "phoneType": "FAXNUMBER"
       }
-    ]
-  },
-  {
-    "code": 59457,
-    "name": {
-      "content": "Seri Pacific Hotel Kuala Lumpur"
-    },
-    "destinationCode": "KUL",
-    "categoryCode": "5EST",
-    "phones": [
+    ],
+    "rooms": [
       {
-        "phoneNumber": "0060327161225",
-        "phoneType": "PHONEBOOKING"
+        "roomCode": "DBL.DX-1",
+        "roomType": "DBL",
+        "characteristicCode": "DX-1",
+        "roomFacilities": [
+          {
+            "facilityCode": 147,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 262,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 279,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 276,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 297,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 100,
+            "facilityGroupCode": 60,
+            "indFee": false,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 302,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 282,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 120,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": false
+          },
+          {
+            "facilityCode": 268,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 330,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "number": 1
+          },
+          {
+            "facilityCode": 295,
+            "facilityGroupCode": 60,
+            "number": 38,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 280,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": false
+          }
+        ],
+        "roomStays": [
+          {
+            "stayType": "BED",
+            "order": "1",
+            "description": "Bed room"
+          }
+        ]
       },
       {
-        "phoneNumber": "0060327161000",
-        "phoneType": "PHONEHOTEL"
+        "roomCode": "DBL.ST-2",
+        "roomType": "DBL",
+        "characteristicCode": "ST-2",
+        "roomFacilities": [
+          {
+            "facilityCode": 262,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 279,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 281,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": false
+          },
+          {
+            "facilityCode": 147,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 297,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 302,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 295,
+            "facilityGroupCode": 60,
+            "number": 30,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 100,
+            "facilityGroupCode": 60,
+            "indFee": false,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 276,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 280,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": false
+          },
+          {
+            "facilityCode": 120,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": true
+          },
+          {
+            "facilityCode": 268,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 330,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "number": 1
+          },
+          {
+            "facilityCode": 282,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          }
+        ],
+        "roomStays": [
+          {
+            "stayType": "BED",
+            "order": "1",
+            "description": "Bed room"
+          }
+        ]
       },
       {
-        "phoneNumber": "0060327155000",
-        "phoneType": "FAXNUMBER"
+        "roomCode": "TWN.ST-2",
+        "roomType": "TWN",
+        "characteristicCode": "ST-2",
+        "roomFacilities": [
+          {
+            "facilityCode": 282,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 262,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 288,
+            "facilityGroupCode": 60,
+            "indLogic": false
+          },
+          {
+            "facilityCode": 279,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 147,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 120,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": false
+          },
+          {
+            "facilityCode": 297,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 302,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 295,
+            "facilityGroupCode": 60,
+            "number": 30,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 100,
+            "facilityGroupCode": 60,
+            "indFee": false,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 276,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 268,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 280,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": false
+          }
+        ],
+        "roomStays": [
+          {
+            "stayType": "BED",
+            "order": "1",
+            "description": "Bed room"
+          }
+        ]
+      },
+      {
+        "roomCode": "SUI.ST-2",
+        "roomType": "SUI",
+        "characteristicCode": "ST-2",
+        "roomFacilities": [
+          {
+            "facilityCode": 30,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 120,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": false
+          },
+          {
+            "facilityCode": 100,
+            "facilityGroupCode": 60,
+            "indFee": false,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 295,
+            "facilityGroupCode": 60,
+            "number": 45,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 276,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 279,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 288,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          }
+        ],
+        "roomStays": [
+          {
+            "stayType": "BED",
+            "order": "1",
+            "description": "Bed room"
+          }
+        ]
+      },
+      {
+        "roomCode": "DBT.DX-PE",
+        "roomType": "DBT",
+        "characteristicCode": "DX-PE",
+        "roomFacilities": [
+          {
+            "facilityCode": 100,
+            "facilityGroupCode": 60,
+            "indFee": false,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 120,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": false
+          },
+          {
+            "facilityCode": 295,
+            "facilityGroupCode": 60,
+            "number": 38,
+            "indYesOrNo": true
+          }
+        ],
+        "roomStays": [
+          {
+            "stayType": "BED",
+            "order": "1",
+            "description": "Bed room"
+          }
+        ]
+      },
+      {
+        "roomCode": "DBT.ST-2",
+        "roomType": "DBT",
+        "characteristicCode": "ST-2",
+        "roomFacilities": [
+          {
+            "facilityCode": 279,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 147,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 276,
+            "facilityGroupCode": 60,
+            "indLogic": true
+          },
+          {
+            "facilityCode": 100,
+            "facilityGroupCode": 60,
+            "indFee": false,
+            "indYesOrNo": true
+          },
+          {
+            "facilityCode": 120,
+            "facilityGroupCode": 60,
+            "indLogic": true,
+            "indFee": false
+          },
+          {
+            "facilityCode": 295,
+            "facilityGroupCode": 60,
+            "number": 30,
+            "indYesOrNo": true
+          }
+        ],
+        "roomStays": [
+          {
+            "stayType": "BED",
+            "order": "1",
+            "description": "Bed room"
+          }
+        ]
       }
     ]
   }

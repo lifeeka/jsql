@@ -113,6 +113,8 @@ class Client
      */
     private function createTables(JsonExtractor $JsonExtractor)
     {
+        $this->capsule::schema()->disableForeignKeyConstraints();
+
         //create tables
         foreach ($JsonExtractor->getTablesArray() as $TableName => $TableColumn) {
             $this->capsule::schema()->dropIfExists($TableName);
@@ -120,6 +122,9 @@ class Client
                 foreach ($TableColumn as $column_item) {
                     switch ($column_item['type']) {
                         case 'int':
+                            $table->int($column_item['name']);
+                            break;
+                        case 'primary_key':
                             $table->increments($column_item['name']);
                             break;
                         case 'integer':
@@ -131,8 +136,9 @@ class Client
                         case 'double':
                             $table->double($column_item['name'])->nullable();
                             break;
-                        case 'foreign':
+                        case 'foreign_key':
                             $table->integer($column_item['name'])->unsigned();
+                            $table->foreign($column_item['name'])->references('id')->on($column_item['ref']);
                             break;
                         default:
                             $table->text($column_item['name'])->nullable();
@@ -143,12 +149,8 @@ class Client
             });
         }
 
-        //add foreign keys
-        foreach ($JsonExtractor->getForeignKeyArray() as $TableName => $TableData) {
-            $this->capsule::schema()->table($TableName, function ($table) use ($TableData) {
-                //$table->foreign($TableData['name'], $TableData['name'] . $TableData['table'])->references('id')->on($TableData['table']);
-            });
-        }
+        $this->capsule::schema()->enableForeignKeyConstraints();
+
     }
 
     /**
@@ -157,9 +159,12 @@ class Client
      */
     private function insertData(JsonExtractor $JsonExtractor)
     {
+        $this->capsule::schema()->disableForeignKeyConstraints();
         foreach ($JsonExtractor->getDataArray() as $TableName => $TableData) {
             $this->capsule::table($TableName)->insert($TableData);
         }
+        $this->capsule::schema()->enableForeignKeyConstraints();
+
         return true;
     }
 

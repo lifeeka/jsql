@@ -2,14 +2,22 @@
 
 namespace Lifeeka\JSQL\Helpers;
 
+use Lifeeka\JSQL\Extractor\JsonExtractor;
+
 /**
  * Class MysqlExtractor.
  */
 class Json
 {
-    public $json_text;
-    public $json_array;
-    public $main_table_name = "main";
+
+    private $json_text;
+    private $json_array;
+    private $main_table_name = "main";
+    private $foreign_keys = [];
+    private $increment = 0;
+
+    private $t = 0;
+
 
     /**
      * Json constructor.
@@ -40,6 +48,14 @@ class Json
         return $json_object;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getForeignKeys()
+    {
+        return $this->foreign_keys;
+    }
+
 
     /**
      * @param $json
@@ -58,23 +74,44 @@ class Json
 
     /**
      * @param $array
-     * @return array
+     * @param bool $parent_table
+     * @param bool $last_increment
+     * @return array|mixed
      */
-    private function addID($array)
+    private function addID($array, $parent_table = false, $last_increment = false)
     {
+
         if (!is_array($array))
-            $array = json_decode($array, true);
+            $array = json_decode($array, true);//if this is not the first time decode the text
 
-        $return_array = $array;
-
-        $index = 1;
+        $return_array = $array;//return array
 
         foreach ($array ?? [] as $key => $array_item) {
-            if (is_array($array_item)) {
-                $array_item = $this->addID($array_item);
 
-                if (empty($array_item['id']) && empty($array_item[0]))
-                    $array_item = ['id' => $index++] + $array_item;
+            if (!is_numeric($key) && $parent_table)//single array table, no column
+                $table_name = $parent_table . '_' . $key;
+            elseif ($parent_table)//multiple array items
+                $table_name = $parent_table;
+            else {//first time loop
+                $table_name = $this->main_table_name;
+            }
+
+            if (is_array($array_item)) {//if this is a array
+                $array_item = $this->addID($array_item, $table_name, $this->increment);//recursive the array
+                if (empty($array_item['id']) && empty($array_item[0])) {//if this is a single array with no child
+                    $array_item = ['id' => $this->increment++] + $array_item;//add id
+                }
+
+                if(isset($array_item[0]) && !is_array($array_item[0]) && !is_object($array_item[0])){//reference table
+
+
+                    $array_item = (object)array_map(function ($item){
+                        return (object)[
+                            'id' => $this->increment++,
+                            'value'=>$item
+                        ];
+                    },$array_item); 
+                }
 
                 $return_array[$key] = $array_item;
             }
@@ -90,7 +127,7 @@ class Json
      * @param bool $parent_key
      * @return array|mixed
      */
-    private function addForeign($array, $parent_table = false, $parent_key = false)
+    private function addForeign($array, $parent_table = null, $parent_key = false)
     {
         if (!is_array($array))
             $array = json_decode($array, true);
@@ -98,7 +135,18 @@ class Json
         $return_array = $array;
         foreach ($array ?? [] as $key => $array_item) {
 
-            $table_name = $parent_table ? $parent_table : (!is_numeric($key) ? $key : "main");
+
+
+            if (!is_numeric($key) && $parent_table)//single array table, no column
+                $table_name = $parent_table . '_' . $key;
+            elseif ($parent_table)//multiple array items
+                $table_name = $parent_table;
+            elseif (!is_numeric($key))  //first time loop
+                $table_name = $key;
+            else {//first time loop
+                $table_name = $this->main_table_name;
+            }
+
 
             if (is_array($array_item)) {
                 $array_item = $this->addForeign($array_item, $table_name, $array_item['id'] ?? ($parent_key ?? false));
@@ -106,7 +154,14 @@ class Json
 
 
                 if ($parent_key && empty($array_item[0])) {
-                    $return_array[$key] = $array_item + [$parent_table . '_id' => $parent_key];
+                    $return_array[$key] = $array_item + ['foreign_key' => $parent_key];
+                }
+
+                if (!is_numeric($key)) {
+                    $this->foreign_keys[JsonExtractor::snakeCase($table_name)] = [
+                        'ref' => $parent_table,
+                        'name' => JsonExtractor::snakeCase('foreign_key')
+                    ];
                 }
 
 
