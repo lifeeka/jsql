@@ -150,7 +150,6 @@ class Client
         }
 
         $this->capsule::schema()->enableForeignKeyConstraints();
-
     }
 
     /**

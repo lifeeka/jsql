@@ -61,8 +61,6 @@ class JsonExtractor
      */
     public function toMysqlTables($data = false, $prefix = '')
     {
-
-
         if (!$data) {//if this is not a recursive
             $data = $this->json->toObject();
         }
@@ -93,7 +91,6 @@ class JsonExtractor
      */
     public function toMysqlData($data = false, $prefix = '')
     {
-
         if (!$data) {//if this is not a recursive
             $data = $this->json->toObject();
         }
@@ -117,7 +114,6 @@ class JsonExtractor
      */
     public function getTableData($table_name, $value)
     {
-
         if (isset($this->table[$table_name])) {
             $ColumnList = $this->table[$table_name];
 
@@ -185,7 +181,6 @@ class JsonExtractor
      */
     public function getColumn($data, $table)
     {
-
         $ForeignKeys = $this->json->getForeignKeys();
 
         $Columns = [];
@@ -193,13 +188,13 @@ class JsonExtractor
         if (is_object($data)) {
             foreach ($data ?? [] as $Column => $Value) {
                 if (!is_array($Value) && !is_object($Value) && !empty($Column) && !is_numeric($Column)) {
-
-                    if (isset($ForeignKeys[JsonExtractor::snakeCase($table)]) && $ForeignKeys[JsonExtractor::snakeCase($table)]['name'] == JsonExtractor::snakeCase($Column))
+                    if (isset($ForeignKeys[JsonExtractor::snakeCase($table)]) && $ForeignKeys[JsonExtractor::snakeCase($table)]['name'] == JsonExtractor::snakeCase($Column)) {
                         $Columns[] = ['name' => $Column, 'type' => 'foreign_key', 'ref' => $ForeignKeys[JsonExtractor::snakeCase($table)]['ref']];
-                    elseif ($Column == 'id')
+                    } elseif ($Column == 'id') {
                         $Columns[] = ['name' => $Column, 'type' => 'primary_key'];
-                    else
+                    } else {
                         $Columns[] = ['name' => $Column, 'type' => gettype($this->getActualDataType($Value, ""))];
+                    }
                 }
             }
         } elseif (is_array($data)) {
