@@ -9,7 +9,6 @@ use Lifeeka\JSQL\Extractor\JsonExtractor;
  */
 class Json
 {
-
     private $json_text;
     private $json_array;
     private $main_table_name = "main";
@@ -80,19 +79,18 @@ class Json
      */
     private function addID($array, $parent_table = false, $last_increment = false)
     {
-
-        if (!is_array($array))
-            $array = json_decode($array, true);//if this is not the first time decode the text
+        if (!is_array($array)) {
+            $array = json_decode($array, true);
+        }//if this is not the first time decode the text
 
         $return_array = $array;//return array
 
         foreach ($array ?? [] as $key => $array_item) {
-
-            if (!is_numeric($key) && $parent_table)//single array table, no column
+            if (!is_numeric($key) && $parent_table) {//single array table, no column
                 $table_name = $parent_table . '_' . $key;
-            elseif ($parent_table)//multiple array items
+            } elseif ($parent_table) {//multiple array items
                 $table_name = $parent_table;
-            else {//first time loop
+            } else {//first time loop
                 $table_name = $this->main_table_name;
             }
 
@@ -102,15 +100,15 @@ class Json
                     $array_item = ['id' => $this->increment++] + $array_item;//add id
                 }
 
-                if(isset($array_item[0]) && !is_array($array_item[0]) && !is_object($array_item[0])){//reference table
+                if (isset($array_item[0]) && !is_array($array_item[0]) && !is_object($array_item[0])) {//reference table
 
 
-                    $array_item = (object)array_map(function ($item){
+                    $array_item = (object)array_map(function ($item) {
                         return (object)[
                             'id' => $this->increment++,
                             'value'=>$item
                         ];
-                    },$array_item); 
+                    }, $array_item);
                 }
 
                 $return_array[$key] = $array_item;
@@ -118,7 +116,6 @@ class Json
         }
 
         return $return_array;
-
     }
 
     /**
@@ -129,21 +126,19 @@ class Json
      */
     private function addForeign($array, $parent_table = null, $parent_key = false)
     {
-        if (!is_array($array))
+        if (!is_array($array)) {
             $array = json_decode($array, true);
+        }
 
         $return_array = $array;
         foreach ($array ?? [] as $key => $array_item) {
-
-
-
-            if (!is_numeric($key) && $parent_table)//single array table, no column
+            if (!is_numeric($key) && $parent_table) {//single array table, no column
                 $table_name = $parent_table . '_' . $key;
-            elseif ($parent_table)//multiple array items
+            } elseif ($parent_table) {//multiple array items
                 $table_name = $parent_table;
-            elseif (!is_numeric($key))  //first time loop
+            } elseif (!is_numeric($key)) {  //first time loop
                 $table_name = $key;
-            else {//first time loop
+            } else {//first time loop
                 $table_name = $this->main_table_name;
             }
 
@@ -163,12 +158,9 @@ class Json
                         'name' => JsonExtractor::snakeCase('foreign_key')
                     ];
                 }
-
-
             }
         }
 
         return $return_array;
-
     }
 }
