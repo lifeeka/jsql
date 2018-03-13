@@ -271,7 +271,6 @@ class JsonExtractor
      */
     public function isPropertyExist($Object, $Attribute)
     {
-
         foreach (array_keys(get_object_vars($Object)) as $CurrentAttributeName) {
             if ($this->snake_case_column && $this->snakeCase($CurrentAttributeName) == $Attribute) {
                 return true;
