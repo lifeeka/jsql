@@ -22,12 +22,13 @@ class JsonExtractor
 
     /**
      * JsonExtractor constructor.
-     *
      * @param Json $json
+     * @param $mainTableName
      */
-    public function __construct(Json $json)
+    public function __construct(Json $json, $mainTableName)
     {
         $this->json = $json;
+        $this->main_table_name = $mainTableName;
     }
 
     /**
@@ -77,7 +78,7 @@ class JsonExtractor
                 $table_data = $this->getTable($prefix . $table_name, $value); //get table sql
                 $this->table[$table_data['name']] = $table_data['column'];
 
-                $this->toMysqlTables($this->getHighestColumnArray($value), $prefix . $table_name . "_", $prefix . $table_name); //get it inside tables
+                $this->toMysqlTables($this->getHighestColumnArray($value), $prefix . $table_name . "_"); //get it inside tables
             } elseif (is_array($value) || is_object($value)) {//if it's a array and  firs element is not a object
 
                 $table_data = $this->getTable($prefix . $table_name, $value);
@@ -124,7 +125,7 @@ class JsonExtractor
             $DataItem = [];
 
             if (is_object($value)) {
-                foreach ($ColumnList as $key => $ColumnItem) {
+                foreach ($ColumnList as $ColumnItem) {
                     if ($this->isPropertyExist($value, $ColumnItem['name'])) {
                         $CurrentItem = $this->snake_case_column ? $this->objectToSnakeCase($value) : $value;
                         $column_name = $ColumnItem['name'];
@@ -275,7 +276,8 @@ class JsonExtractor
      */
     public function isPropertyExist($Object, $Attribute)
     {
-        foreach ($Object as $CurrentAttributeName => $CurrentAttribute) {
+
+        foreach (array_keys(get_object_vars($Object)) as $CurrentAttributeName) {
             if ($this->snake_case_column && $this->snakeCase($CurrentAttributeName) == $Attribute) {
                 return true;
             } elseif ($CurrentAttributeName === $Attribute) {
@@ -304,7 +306,7 @@ class JsonExtractor
         foreach ($array as $array_item) {
             $current_sub = 0;
             //check how many array/object have
-            foreach ($array_item as $SubTableName => $SubArrayItem) {
+            foreach ($array_item as $SubArrayItem) {
                 if (is_array($SubArrayItem) || is_object($SubArrayItem)) {
                     $current_sub = $current_sub + 2;
                 }

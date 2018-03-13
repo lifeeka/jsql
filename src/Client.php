@@ -15,6 +15,8 @@ class Client
     const DATA_ONLY = "data_only";
     const ALL = "all";
 
+    public $mainTableName = "main";
+
     public $capsule;
     public $error = false;
     public $file_content = null;
@@ -41,6 +43,8 @@ class Client
             'prefix' => '',
             'strict' => false
         ]);
+
+        $this->mainTableName = $config['main_table'] ?? $this->mainTableName;
 
         $this->capsule->setAsGlobal();
     }
@@ -87,7 +91,7 @@ class Client
      */
     public function migrate($type = Client::ALL)
     {
-        $JsonExtractor = new JsonExtractor(new Json($this->file_content));
+        $JsonExtractor = new JsonExtractor(new Json($this->file_content, $this->mainTableName), $this->mainTableName);
         $JsonExtractor->toMysqlTables();
 
         switch ($type) {

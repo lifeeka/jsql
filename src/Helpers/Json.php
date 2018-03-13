@@ -11,24 +11,22 @@ class Json
 {
 
     private $json_text;
-    private $json_array;
     private $main_table_name = "main";
     private $foreign_keys = [];
     private $increment = 0;
 
-    private $t = 0;
-
 
     /**
      * Json constructor.
-     *
-     * @param string $json
+     * @param String $json
+     * @param $mainTableName
      */
-    public function __construct(String $json)
+    public function __construct(String $json, $mainTableName)
     {
         $this->json_text = $json;
         $this->json_text = json_encode($this->addID($this->json_text));
         $this->json_text = json_encode($this->addForeign($this->json_text));
+        $this->main_table_name = $mainTableName;
     }
 
     /**
@@ -75,10 +73,9 @@ class Json
     /**
      * @param $array
      * @param bool $parent_table
-     * @param bool $last_increment
      * @return array|mixed
      */
-    private function addID($array, $parent_table = false, $last_increment = false)
+    private function addID($array, $parent_table = false)
     {
 
         if (!is_array($array))
