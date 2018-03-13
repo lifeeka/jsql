@@ -12,7 +12,7 @@ class Json
     private $json_text;
     private $main_table_name = "main";
     private $foreign_keys = [];
-    private $increment = 0;
+    private $increment = 1;
 
 
     /**
