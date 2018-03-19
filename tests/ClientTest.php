@@ -14,7 +14,7 @@ class ClientTest extends TestCase
     public function setUp()
     {
 
-        $config['host'] = '127.0.0.1';
+        $config['host'] = 'mariadb';
         $config['db'] = 'test';
         $config['username'] = 'test';
         $config['password'] = 'test';

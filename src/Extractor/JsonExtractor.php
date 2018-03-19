@@ -306,11 +306,11 @@ class JsonExtractor
                 }
             }
             //check how many column have
-            if ($ColumnCount <= count($array_item) || !$Highest) {
+            if ($ColumnCount <= @count($array_item) || !$Highest) {
                 if ($current_sub > $HighestSubCount || !$Highest) {
                     $Highest = $array_item;
                     $HighestSubCount = $current_sub;
-                    $ColumnCount = count($array_item);
+                    $ColumnCount = @count($array_item);
                 }
             }
         }
