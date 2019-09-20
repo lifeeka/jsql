@@ -41,7 +41,7 @@ composer require lifeeka/jsql:dev-master
 
 
 ### Contributing
-Contributions are welcome 😍
+Contributions are welcome! 😍
 
 ### Todos
 
