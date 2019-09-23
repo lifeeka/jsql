@@ -1,6 +1,7 @@
 <p align="center"><img src="https://i.imgur.com/hGzLkvc.png"></p>
 
 <br>
+<br>
 
 [![Build Status](https://travis-ci.org/lifeeka/jsql.svg?branch=master)](https://travis-ci.org/lifeeka/jsql)
 [![StyleCI](https://styleci.io/repos/122715777/shield?branch=master)](https://styleci.io/repos/122715777)
